@@ -51,11 +51,12 @@ function Login(props) {
       .post("/users/login", userInfo)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data.user.email);
+          console.log(res.data.user._id);
           const loggedUser = {
             email: res.data.user.email,
             username: res.data.user.username,
             token: res.data.token,
+            id: res.data.user._id,
             createdAt: res.data.user.created,
             games: res.data.user.games,
           };
