@@ -1,0 +1,66 @@
+import React, { useState } from "react";
+import Results from "./Results";
+import SearchBar from "material-ui-search-bar";
+import GameCard from "./GameCard";
+import { Container, Row, Col } from "react-bootstrap";
+import Grid from "@material-ui/core/Grid";
+
+const Search = () => {
+  const { REACT_APP_API_KEY } = process.env;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [gameResults, setGameResults] = useState([]);
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    // e.preventDefault();
+    let slug = searchTerm.split(" ").join("-").toLowerCase();
+    setGameResults([]);
+    fetch(
+      `https://api.rawg.io/api/games?search=${slug}&key=${REACT_APP_API_KEY}`
+    )
+      .then((res) => res.json())
+      .then(({ results }) => {
+        results === undefined
+          ? alert("no games found")
+          : setGameResults(results);
+      });
+    setSearchTerm("");
+  };
+
+  return (
+    <div className="game-search">
+      {/* <h1>Game Search</h1>
+        <form onSubmit={onSubmit}>
+          <input type="text" value={searchTerm} onChange={handleChange} />
+          <br></br>
+          <input type="submit" />
+        </form> */}
+      <SearchBar
+        onChange={(newValue) => setSearchTerm(newValue)}
+        onRequestSearch={onSubmit}
+        style={{
+          margin: "0 auto",
+          maxWidth: 800,
+        }}
+      ></SearchBar>
+      <Grid
+        container
+        direction="row"
+        alignContent="center"
+        alignItems="center"
+        wrap="wrap"
+        spacing={12}
+      >
+        <Results gameResults={gameResults} />
+      </Grid>
+      {/* <Row>
+          <Results gameResults={gameResults} />
+        </Row> */}
+    </div>
+  );
+};
+
+export default Search;
