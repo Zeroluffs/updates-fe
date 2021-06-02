@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,6 +10,11 @@ import Grid from "@material-ui/core/Grid";
 import { ThemeProvider, Typography, Button } from "@material-ui/core";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import "../App.css";
+import axios from "axios";
+import { AuthContext } from "../context/auth";
+const api = axios.create({
+  baseURL: `http://localhost:3000/api`,
+});
 const useStyles = makeStyles({
   root: {
     // maxWidth: 345,
@@ -25,6 +30,8 @@ const useStyles = makeStyles({
 });
 
 const GameCard = (props) => {
+  const user = useContext(AuthContext);
+
   const classes = useStyles();
   const game = props.game;
   console.log(props.game);
@@ -39,6 +46,29 @@ const GameCard = (props) => {
       button: {},
     },
   });
+
+  const addGame = async (game) => {
+    console.log(user);
+    const gameToAdd = {
+      name: game.name,
+      score: game.rating,
+      releaseDate: game.released,
+    };
+    api
+      .post("/games/" + user.user.id, gameToAdd)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("game added");
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error adding game");
+      });
+  };
   return (
     <Grid alignItems="center" item xs={12}>
       <ThemeProvider theme={theme}>
@@ -80,7 +110,13 @@ const GameCard = (props) => {
           </Link>
 
           <CardActions>
-            <Button size="small" color="primary">
+            <Button
+              size="small"
+              color="primary"
+              onClick={(e) => {
+                addGame(game);
+              }}
+            >
               Add to My List
             </Button>
             <Link
