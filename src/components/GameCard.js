@@ -34,7 +34,7 @@ const GameCard = (props) => {
 
   const classes = useStyles();
   const game = props.game;
-  console.log(props.game);
+  // console.log(props.game);
   const theme = createMuiTheme({
     typography: {
       subtitle1: {
@@ -53,6 +53,7 @@ const GameCard = (props) => {
       name: game.name,
       score: game.rating,
       releaseDate: game.released,
+      id: game.id,
     };
     api
       .post("/games/" + user.user.id, gameToAdd)
@@ -70,6 +71,7 @@ const GameCard = (props) => {
       });
   };
   return (
+    
     <Grid alignItems="center" item xs={12}>
       <ThemeProvider theme={theme}>
         <Card className="root">

@@ -13,7 +13,7 @@ import { AuthProvider } from "./context/auth";
 import AuthRoute from "./utils/AuthRoute";
 import Search from "./components/Search";
 import GameDetail from "./components/GameDetail";
-
+import GameList from "./components/game-list.component";
 function App() {
   return (
     <AuthProvider>
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
           <Route path="/game/:name" component={GameDetail} />
+          <Route exact path="/gamelist" component={GameList} />
           <AuthRoute exact path="/login" component={Login}></AuthRoute>
           <AuthRoute exact path="/register" component={Register}></AuthRoute>
         </Container>
