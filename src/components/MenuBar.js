@@ -23,6 +23,13 @@ function MenuBar() {
           as={Link}
           to="/search"
         ></Menu.Item>
+        <Menu.Item
+          name="list"
+          active={activeItem === "list"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/gamelist"
+        ></Menu.Item>
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
     </Menu>

@@ -4,12 +4,15 @@ import SearchBar from "material-ui-search-bar";
 import GameCard from "./GameCard";
 import { Container, Row, Col } from "react-bootstrap";
 import Grid from "@material-ui/core/Grid";
-
+import axios from "axios";
+const api = axios.create({
+  baseURL: `https://api.rawg.io/api/games`,
+});
 const Search = () => {
   const { REACT_APP_API_KEY } = process.env;
   const [searchTerm, setSearchTerm] = useState("");
   const [gameResults, setGameResults] = useState([]);
-
+  console.log(api.baseURL);
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -27,6 +30,21 @@ const Search = () => {
           ? alert("no games found")
           : setGameResults(results);
       });
+    // let ID = 13536;
+    // api
+    //   .get("/" + ID + "?" + "key=" + REACT_APP_API_KEY)
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       console.log(res.data);
+    //     } else {
+    //       const error = new Error(res.error);
+    //       throw error;
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert("Error adding game");
+    //   });
     setSearchTerm("");
   };
 
