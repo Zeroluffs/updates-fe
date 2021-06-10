@@ -40,3 +40,49 @@
   width: 100%;
   object-fit: "cover";
 }
+
+.main {
+  max-width: 100%;
+  max-height: 295px;
+  object-fit: "cover";
+  /* vertical-align: bottom;
+  vertical-align: top;
+  vertical-align: middle;
+  display: inline-block; */
+  float: "left";
+  display: block;
+}
+
+.testing {
+  height: 280px;
+  width: 500px;
+  /* border: 4px solid #333; */
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.ptest {
+  float: right;
+  text-align: center;
+}
+
+.gamedetails {
+  float: left;
+}
+
+.containertest {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.itemtest {
+  background: #ce8888;
+  flex-basis: 100px;
+  height: 100px;
+  margin: 5px;
+}
+
+.gamed {
+  width: 600px
+}
