@@ -8,6 +8,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import GridListTile from "@material-ui/core/GridListTile";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
+import "../App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +55,8 @@ const GameDetail = (props) => {
       },
       body1: {
         fontSize: 22,
+        whiteSpace: "initial",
+        fontStyle:'arial'
       },
       button: {
         fontStyle: "italic",
@@ -63,14 +66,15 @@ const GameDetail = (props) => {
   // theme = responsiveFontSizes(theme);
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <Typography align="center" variant="h3">
-          {game.name}
-        </Typography>
-        <div align="center">
+      {/* <Image className="main" src={game.background_image}></Image> */}
+      <Typography variant="h2">{game.name}</Typography>
+      <div class="containertest">
+        <div className="testing">
+          <img className="main" src={game.background_image}></img>
+        </div>
+        <div className="gamed">
           <Typography variant="body1">Released: {game.released}</Typography>
           <Typography variant="body1">Rating: {game.rating}</Typography>
-
           <Typography variant="h5">Genre(s):</Typography>
           <Typography variant="body1">
             {game.genres.map((g) => `${g.name} | `)}
@@ -81,7 +85,26 @@ const GameDetail = (props) => {
             {game.platforms.map((p) => `${p.platform.name} | `)}
           </Typography>
         </div>
-      </ThemeProvider>
+      </div>
+      {/* <Typography variant="h2">{game.name}</Typography>
+      <div className="testing">
+        <Image className="main" src={game.background_image}></Image>
+      </div>
+      <ThemeProvider theme={theme}>
+        <div>
+          <Typography variant="body1">Released: {game.released}</Typography>
+          <Typography variant="body1">Rating: {game.rating}</Typography>
+          <Typography variant="h5">Genre(s):</Typography>
+          <Typography variant="body1">
+            {game.genres.map((g) => `${g.name} | `)}
+          </Typography>
+
+          <Typography variant="body1">Platform(s):</Typography>
+          <Typography variant="body1">
+            {game.platforms.map((p) => `${p.platform.name} | `)}
+          </Typography>
+        </div>
+      </ThemeProvider> */}
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={cols}>
           {game.short_screenshots.map((ss) => (
