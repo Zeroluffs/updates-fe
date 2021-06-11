@@ -91,6 +91,11 @@
   color: blue;
 }
 
-.Button:disabled { /* Increase the specificity */
+.Button:disabled {
+  /* Increase the specificity */
   color: white;
+}
+
+.imageingallery {
+  object-fit: "cover";
 }
