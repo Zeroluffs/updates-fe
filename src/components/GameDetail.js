@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
+    width: "100%",
   },
   title: {
     color: theme.palette.primary.light,
@@ -38,14 +39,14 @@ const useStyles = makeStyles((theme) => ({
 const GameDetail = (props) => {
   function getCols(screenWidth) {
     if (isWidthUp("lg", screenWidth)) {
-      return 4;
+      return 3;
     }
 
     if (isWidthUp("md", screenWidth)) {
-      return 3.5;
+      return 2.5;
     }
 
-    return 2;
+    return 1;
   }
   const classes = useStyles();
   const cols = getCols(props.width); // width is associated when using withWidth()
@@ -103,25 +104,6 @@ const GameDetail = (props) => {
           </Button>
         </div>
       </div>
-      {/* <Typography variant="h2">{game.name}</Typography>
-      <div className="testing">
-        <Image className="main" src={game.background_image}></Image>
-      </div>
-      <ThemeProvider theme={theme}>
-        <div>
-          <Typography variant="body1">Released: {game.released}</Typography>
-          <Typography variant="body1">Rating: {game.rating}</Typography>
-          <Typography variant="h5">Genre(s):</Typography>
-          <Typography variant="body1">
-            {game.genres.map((g) => `${g.name} | `)}
-          </Typography>
-
-          <Typography variant="body1">Platform(s):</Typography>
-          <Typography variant="body1">
-            {game.platforms.map((p) => `${p.platform.name} | `)}
-          </Typography>
-        </div>
-      </ThemeProvider> */}
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={cols}>
           {game.short_screenshots.map((ss) => (
@@ -129,8 +111,9 @@ const GameDetail = (props) => {
               <img
                 src={ss.image}
                 alt="screenshot"
-                width="100%"
-                height="100%"
+                maxWidth="100%"
+                className="imageingallery"
+                height="auto"
               ></img>
               <GridListTileBar
                 title={game.name}
