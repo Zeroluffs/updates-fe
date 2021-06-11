@@ -12,9 +12,8 @@ import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import "../App.css";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
-const api = axios.create({
-  baseURL: `http://localhost:3000/api`,
-});
+import { addGame } from "../utils/helper.functions";
+
 const useStyles = makeStyles({
   root: {
     // maxWidth: 345,
@@ -47,31 +46,7 @@ const GameCard = (props) => {
     },
   });
 
-  const addGame = async (game) => {
-    console.log(user);
-    const gameToAdd = {
-      name: game.name,
-      score: game.rating,
-      releaseDate: game.released,
-      id: game.id,
-    };
-    api
-      .post("/games/" + user.user.id, gameToAdd)
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("game added");
-        } else {
-          const error = new Error(res.error);
-          throw error;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Error adding game");
-      });
-  };
   return (
-    
     <Grid alignItems="center" item xs={12}>
       <ThemeProvider theme={theme}>
         <Card className="root">
@@ -116,7 +91,7 @@ const GameCard = (props) => {
               size="small"
               color="primary"
               onClick={(e) => {
-                addGame(game);
+                addGame(game, user);
               }}
             >
               Add to My List

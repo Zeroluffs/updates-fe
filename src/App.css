@@ -84,5 +84,13 @@
 }
 
 .gamed {
-  width: 600px
+  width: 600px;
+}
+
+.Button {
+  color: blue;
+}
+
+.Button:disabled { /* Increase the specificity */
+  color: white;
 }

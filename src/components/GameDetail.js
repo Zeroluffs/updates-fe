@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider, Typography } from "@material-ui/core";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
@@ -8,7 +8,10 @@ import GridList from "@material-ui/core/GridList";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import GridListTile from "@material-ui/core/GridListTile";
 import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
+import Button from "@material-ui/core/Button";
 import "../App.css";
+import { addGame } from "../utils/helper.functions";
+import { AuthContext } from "../context/auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +51,8 @@ const GameDetail = (props) => {
   const cols = getCols(props.width); // width is associated when using withWidth()
 
   const { game } = props.location.gameProps;
+  const user = useContext(AuthContext);
+
   const theme = createMuiTheme({
     typography: {
       subtitle1: {
@@ -56,7 +61,7 @@ const GameDetail = (props) => {
       body1: {
         fontSize: 22,
         whiteSpace: "initial",
-        fontStyle:'arial'
+        fontStyle: "arial",
       },
       button: {
         fontStyle: "italic",
@@ -84,6 +89,18 @@ const GameDetail = (props) => {
           <Typography variant="body1">
             {game.platforms.map((p) => `${p.platform.name} | `)}
           </Typography>
+          <Button size="small" variant="outlined" color="secondary">
+            Secondary
+          </Button>
+          <Button
+            onClick={(e) => {
+              addGame(game, user);
+            }}
+            variant="outlined"
+            className="Button"
+          >
+            Add Game
+          </Button>
         </div>
       </div>
       {/* <Typography variant="h2">{game.name}</Typography>
