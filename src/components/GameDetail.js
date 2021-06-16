@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider, Typography } from "@material-ui/core";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
@@ -12,7 +12,12 @@ import Button from "@material-ui/core/Button";
 import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
+import axios from "axios";
+import _ from "lodash";
 
+const api = axios.create({
+  baseURL: `http://localhost:3000/api`,
+});
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -37,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GameDetail = (props) => {
+  const [found, setFound] = useState(false);
   function getCols(screenWidth) {
     if (isWidthUp("lg", screenWidth)) {
       return 3;
@@ -69,14 +75,33 @@ const GameDetail = (props) => {
       },
     },
   });
+  useEffect(() => {
+    api.get("/games" + "/" + user.user.id).then((res) => {
+      var __FOUND = res.data.find(function (post, index) {
+        if (post.id === game.id.toString()) {
+          setFound(true);
+          console.log(found);
+
+          return true;
+        }
+        return false;
+      });
+      console.log(__FOUND);
+    });
+  }, []);
   // theme = responsiveFontSizes(theme);
+
   return (
     <div>
       {/* <Image className="main" src={game.background_image}></Image> */}
       <Typography variant="h2">{game.name}</Typography>
       <div class="containertest">
         <div className="testing">
-          <img className="main" src={game.background_image}></img>
+          <img
+            alt="background"
+            className="main"
+            src={game.background_image}
+          ></img>
         </div>
         <div className="gamed">
           <Typography variant="body1">Released: {game.released}</Typography>
@@ -96,9 +121,11 @@ const GameDetail = (props) => {
           <Button
             onClick={(e) => {
               addGame(game, user);
+              setFound(true);
             }}
             variant="outlined"
             className="Button"
+            disabled={found}
           >
             Add Game
           </Button>
