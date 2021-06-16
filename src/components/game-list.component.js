@@ -1,15 +1,8 @@
-import React, {
-  Component,
-  useState,
-  useEffect,
-  useContext,
-  Fragment,
-  useCallback,
-} from "react";
+/* eslint-disable no-useless-concat */
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-import { Button, TextField, Paper } from "@material-ui/core";
-import { Link } from "react-router-dom";
+
 import MaterialTable from "material-table";
 import TableIcons from "./TableIcons";
 
@@ -48,7 +41,7 @@ const GameList = (props) => {
       console.log(res.data);
       setData(res.data);
     });
-  }, []);
+  });
   const handleRowClick = async (event, rowData) => {
     console.log(rowData.id);
     const res = await gamesApi.get(

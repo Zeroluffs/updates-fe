@@ -1,9 +1,9 @@
+/* eslint-disable no-useless-concat */
 import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { ThemeProvider, Typography } from "@material-ui/core";
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-import Image from "material-ui-image";
-import Grid from "@material-ui/core/Grid";
+import { Typography } from "@material-ui/core";
+// import { createMuiTheme } from "@material-ui/core/styles";
+
 import GridList from "@material-ui/core/GridList";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -13,7 +13,6 @@ import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-import _ from "lodash";
 
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
@@ -60,21 +59,21 @@ const GameDetail = (props) => {
   const { game } = props.location.gameProps;
   const user = useContext(AuthContext);
 
-  const theme = createMuiTheme({
-    typography: {
-      subtitle1: {
-        fontSize: 12,
-      },
-      body1: {
-        fontSize: 22,
-        whiteSpace: "initial",
-        fontStyle: "arial",
-      },
-      button: {
-        fontStyle: "italic",
-      },
-    },
-  });
+  // const theme = createMuiTheme({
+  //   typography: {
+  //     subtitle1: {
+  //       fontSize: 12,
+  //     },
+  //     body1: {
+  //       fontSize: 22,
+  //       whiteSpace: "initial",
+  //       fontStyle: "arial",
+  //     },
+  //     button: {
+  //       fontStyle: "italic",
+  //     },
+  //   },
+  // });
   useEffect(() => {
     api.get("/games" + "/" + user.user.id).then((res) => {
       var __FOUND = res.data.find(function (post, index) {
@@ -88,7 +87,7 @@ const GameDetail = (props) => {
       });
       console.log(__FOUND);
     });
-  }, []);
+  });
   // theme = responsiveFontSizes(theme);
 
   return (
