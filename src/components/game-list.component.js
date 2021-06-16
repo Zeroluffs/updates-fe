@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-concat */
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
@@ -41,7 +40,7 @@ const GameList = (props) => {
       console.log(res.data);
       setData(res.data);
     });
-  });
+  }, []);
   const handleRowClick = async (event, rowData) => {
     console.log(rowData.id);
     const res = await gamesApi.get(
