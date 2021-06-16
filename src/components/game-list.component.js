@@ -11,6 +11,12 @@ import axios from "axios";
 import { Button, TextField, Paper } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import MaterialTable from "material-table";
+import {
+  Edit as EditIcon,
+  Add as AddIcon,
+  MonetizationOn,
+  Delete as DeleteIcon,
+} from "@material-ui/icons";
 import TableIcons from "./TableIcons";
 
 const api = axios.create({
@@ -74,6 +80,23 @@ const GameList = (props) => {
         });
       });
   };
+  const handleRowDelete = (oldData, resolve) => {
+    api
+      .delete("/games/" + user.user.id + "/" + oldData._id)
+      .then((res) => {
+        const dataDelete = [...data];
+        const index = oldData.tableData.id;
+        dataDelete.splice(index, 1);
+        setData([...dataDelete]);
+        resolve();
+        console.log(res);
+      })
+      .catch((error) => {
+        // setErrorMessages(["Delete failed! Server error"]);
+        // setIserror(true);
+        resolve();
+      });
+  };
   return (
     <div>
       <MaterialTable
@@ -82,6 +105,19 @@ const GameList = (props) => {
         onRowClick={handleRowClick}
         data={data}
         icons={TableIcons}
+        actions={[
+          {
+            icon: () => <DeleteIcon />,
+            tooltip: "Remove Game",
+            onClick: (event, oldData) => {
+              if (window.confirm("Are you sure you want to remove the game?")) {
+                new Promise((resolve) => {
+                  handleRowDelete(oldData, resolve);
+                });
+              }
+            },
+          },
+        ]}
       ></MaterialTable>
     </div>
   );
