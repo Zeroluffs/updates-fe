@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -13,7 +13,9 @@ import "../App.css";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
 import { addGame } from "../utils/helper.functions";
-
+const api = axios.create({
+  baseURL: `http://localhost:3000/api`,
+});
 const useStyles = makeStyles({
   root: {
     // maxWidth: 345,
@@ -30,6 +32,7 @@ const useStyles = makeStyles({
 
 const GameCard = (props) => {
   const user = useContext(AuthContext);
+  const [found, setFound] = useState(false);
 
   const classes = useStyles();
   const game = props.game;
@@ -45,7 +48,20 @@ const GameCard = (props) => {
       button: {},
     },
   });
+  useEffect(() => {
+    api.get("/games" + "/" + user.user.id).then((res) => {
+      var __FOUND = res.data.find(function (post, index) {
+        if (post.id === game.id.toString()) {
+          setFound(true);
+          console.log(found);
 
+          return true;
+        }
+        return false;
+      });
+      console.log(__FOUND);
+    });
+  }, []);
   return (
     <Grid alignItems="center" item xs={12}>
       <ThemeProvider theme={theme}>
@@ -92,7 +108,9 @@ const GameCard = (props) => {
               color="primary"
               onClick={(e) => {
                 addGame(game, user);
+                setFound(true);
               }}
+              disabled={found}
             >
               Add to My List
             </Button>
