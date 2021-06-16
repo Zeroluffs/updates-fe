@@ -16,19 +16,31 @@ import { addGame } from "../utils/helper.functions";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
+
 const useStyles = makeStyles({
   root: {
-    // maxWidth: 345,
-    // margin: "auto",
-    width: 320,
-    height: 415,
+    width: 350,
+    margin: "auto",
   },
   media: {
-    height: 330,
-    // width:"100%",
-    // height:"100%",
+    height: 190,
+    width: "100%",
+    objectFit: "cover",
   },
 });
+// const useStyles = makeStyles({
+//   root: {
+//     // maxWidth: 345,
+//     // margin: "auto",
+//     // width: 320,
+//     // height: 415,
+//   },
+//   media: {
+//     // height: 330,
+//     // width:"100%",
+//     // height:"100%",
+//   },
+// });
 
 const GameCard = (props) => {
   const user = useContext(AuthContext);
@@ -59,77 +71,130 @@ const GameCard = (props) => {
         }
         return false;
       });
-      console.log(__FOUND);
+      console.log(game);
     });
   }, []);
   return (
-    <Grid alignItems="center" item xs={12}>
-      <ThemeProvider theme={theme}>
-        <Card className="root">
-          <Link
-            to={{
-              pathname: `/game/${game.name}`,
-              gameProps: {
-                game: game,
-              },
-            }}
-          >
-            <CardActionArea>
-              <CardMedia
-                className="media"
-                // image={game.background_image}
-              >
-                <img
-                  src={game.background_image}
-                  alt="screenshot"
-                  width="100%"
-                  height="100%"
-                ></img>
-              </CardMedia>
-              {/* <CardMedia
-                className="media"
-                image={game.background_image}
-                title="Contemplative Reptile"
-              /> */}
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {game.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {game.released}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Link>
+    <Card className={classes.root}>
+      <Link
+        to={{
+          pathname: `/game/${game.name}`,
+          gameProps: {
+            game: game,
+          },
+        }}
+      >
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={game.background_image}
+            title="screenshot"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {game.name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {game.released}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
 
-          <CardActions>
-            <Button
-              size="small"
-              color="primary"
-              onClick={(e) => {
-                addGame(game, user);
-                setFound(true);
-              }}
-              disabled={found}
-            >
-              Add to My List
-            </Button>
-            <Link
-              to={{
-                pathname: `/game/${game.name}`,
-                gameProps: {
-                  game: game,
-                },
-              }}
-            >
-              <Button size="small" color="primary">
-                More Details
-              </Button>
-            </Link>
-          </CardActions>
-        </Card>
-      </ThemeProvider>
-    </Grid>
+      <CardActions>
+        <Button
+          size="small"
+          color="primary"
+          onClick={(e) => {
+            addGame(game, user);
+            setFound(true);
+          }}
+          disabled={found}
+        >
+          Add to My List
+        </Button>
+        <Link
+          to={{
+            pathname: `/game/${game.name}`,
+            gameProps: {
+              game: game,
+            },
+          }}
+        >
+          <Button size="small" color="primary">
+            More Details
+          </Button>
+        </Link>
+      </CardActions>
+    </Card>
+
+    // <Grid alignItems="center" item xs={12}>
+    //   <ThemeProvider theme={theme}>
+    //     <Card className="root">
+    //       <Link
+    //         to={{
+    //           pathname: `/game/${game.name}`,
+    //           gameProps: {
+    //             game: game,
+    //           },
+    //         }}
+    //       >
+    //         <CardActionArea>
+    //           <CardMedia
+    //             className="media"
+    //             // image={game.background_image}
+    //           >
+    //             <img
+    //               src={game.background_image}
+    //               alt="screenshot"
+    //               width="100%"
+    //               height="100%"
+    //             ></img>
+    //           </CardMedia>
+    //           {/* <CardMedia
+    //             className="media"
+    //             image={game.background_image}
+    //             title="Contemplative Reptile"
+    //           /> */}
+    //           <CardContent>
+    //             <Typography gutterBottom variant="h5" component="h2">
+    //               {game.name}
+    //             </Typography>
+    //             <Typography variant="body2" color="textSecondary" component="p">
+    //               {game.released}
+    //             </Typography>
+    //           </CardContent>
+    //         </CardActionArea>
+    //       </Link>
+
+    //       <CardActions>
+    //         <Button
+    //           size="small"
+    //           color="primary"
+    //           onClick={(e) => {
+    //             addGame(game, user);
+    //             setFound(true);
+    //           }}
+    //           disabled={found}
+    //         >
+    //           Add to My List
+    //         </Button>
+    //         <Link
+    //           to={{
+    //             pathname: `/game/${game.name}`,
+    //             gameProps: {
+    //               game: game,
+    //             },
+    //           }}
+    //         >
+    //           <Button size="small" color="primary">
+    //             More Details
+    //           </Button>
+    //         </Link>
+    //       </CardActions>
+    //     </Card>
+    //   </ThemeProvider>
+    // </Grid>
   );
 };
 

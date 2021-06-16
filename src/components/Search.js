@@ -30,21 +30,7 @@ const Search = () => {
           ? alert("no games found")
           : setGameResults(results);
       });
-    // let ID = 13536;
-    // api
-    //   .get("/" + ID + "?" + "key=" + REACT_APP_API_KEY)
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       console.log(res.data);
-    //     } else {
-    //       const error = new Error(res.error);
-    //       throw error;
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     alert("Error adding game");
-    //   });
+
     setSearchTerm("");
   };
 
@@ -64,7 +50,7 @@ const Search = () => {
           maxWidth: 800,
         }}
       ></SearchBar>
-      <Grid
+      {/* <Grid
         container
         direction="row"
         alignContent="center"
@@ -73,7 +59,9 @@ const Search = () => {
         spacing={12}
       >
         <Results gameResults={gameResults} />
-      </Grid>
+      </Grid> */}
+      <Results gameResults={gameResults} />
+
       {/* <Row>
           <Results gameResults={gameResults} />
         </Row> */}
