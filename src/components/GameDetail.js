@@ -13,7 +13,7 @@ import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-import _ from "lodash";
+import { useFoundGameState } from "../utils/foundGame.hook";
 
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
@@ -90,6 +90,7 @@ const GameDetail = (props) => {
     });
   }, []);
   // theme = responsiveFontSizes(theme);
+  const isFound = useFoundGameState(user.user.id, game.id);
 
   return (
     <div>
@@ -125,7 +126,7 @@ const GameDetail = (props) => {
             }}
             variant="outlined"
             className="Button"
-            disabled={found}
+            disabled={isFound}
           >
             Add Game
           </Button>
