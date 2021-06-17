@@ -1,9 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { ThemeProvider, Typography } from "@material-ui/core";
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-import Image from "material-ui-image";
-import Grid from "@material-ui/core/Grid";
+import { Typography } from "@material-ui/core";
 import GridList from "@material-ui/core/GridList";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -12,12 +9,8 @@ import Button from "@material-ui/core/Button";
 import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
-import axios from "axios";
 import { useFoundGameState } from "../utils/foundGame.hook";
 
-const api = axios.create({
-  baseURL: `http://localhost:3000/api`,
-});
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -42,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GameDetail = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const [found, setFound] = useState(false);
   function getCols(screenWidth) {
     if (isWidthUp("lg", screenWidth)) {
@@ -60,41 +54,10 @@ const GameDetail = (props) => {
   const { game } = props.location.gameProps;
   const user = useContext(AuthContext);
 
-  const theme = createMuiTheme({
-    typography: {
-      subtitle1: {
-        fontSize: 12,
-      },
-      body1: {
-        fontSize: 22,
-        whiteSpace: "initial",
-        fontStyle: "arial",
-      },
-      button: {
-        fontStyle: "italic",
-      },
-    },
-  });
-  useEffect(() => {
-    api.get("/games" + "/" + user.user.id).then((res) => {
-      var __FOUND = res.data.find(function (post, index) {
-        if (post.id === game.id.toString()) {
-          setFound(true);
-          console.log(found);
-
-          return true;
-        }
-        return false;
-      });
-      console.log(__FOUND);
-    });
-  }, []);
-  // theme = responsiveFontSizes(theme);
   const isFound = useFoundGameState(user.user.id, game.id);
 
   return (
     <div>
-      {/* <Image className="main" src={game.background_image}></Image> */}
       <Typography variant="h2">{game.name}</Typography>
       <div class="containertest">
         <div className="testing">

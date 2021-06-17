@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Results from "./Results";
 import SearchBar from "material-ui-search-bar";
-import GameCard from "./GameCard";
-import { Container, Row, Col } from "react-bootstrap";
-import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 const api = axios.create({
   baseURL: `https://api.rawg.io/api/games`,
@@ -13,9 +10,9 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [gameResults, setGameResults] = useState([]);
   console.log(api.baseURL);
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setSearchTerm(e.target.value);
+  // };
 
   const onSubmit = (e) => {
     // e.preventDefault();

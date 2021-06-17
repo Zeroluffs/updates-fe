@@ -1,13 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
 import GameCard from "./GameCard";
 
-const styles = {
-  gameColumn: {
-    marginBottom: 20,
-  },
-};
 const Results = (props) => {
   const gameColumns = props
     ? props.gameResults.map((game) => (
