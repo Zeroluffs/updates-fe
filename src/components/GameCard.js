@@ -13,6 +13,7 @@ import "../App.css";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
 import { addGame } from "../utils/helper.functions";
+import { useFoundGameState } from "../utils/foundGame.hook";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
@@ -61,19 +62,19 @@ const GameCard = (props) => {
     },
   });
   useEffect(() => {
-    api.get("/games" + "/" + user.user.id).then((res) => {
-      var __FOUND = res.data.find(function (post, index) {
-        if (post.id === game.id.toString()) {
-          setFound(true);
-          console.log(found);
-
-          return true;
-        }
-        return false;
-      });
-      console.log(game);
-    });
+    // api.get("/games" + "/" + user.user.id).then((res) => {
+    //   var __FOUND = res.data.find(function (post, index) {
+    //     if (post.id === game.id.toString()) {
+    //       setFound(true);
+    //       return true;
+    //     }
+    //     return false;
+    //   });
+    // });
   }, []);
+  const isFound = useFoundGameState(user.user.id, game.id);
+  console.log(isFound + "PLEASE WORK");
+
   return (
     <Card className={classes.root}>
       <Link
@@ -109,7 +110,7 @@ const GameCard = (props) => {
             addGame(game, user);
             setFound(true);
           }}
-          disabled={found}
+          disabled={isFound}
         >
           Add to My List
         </Button>
