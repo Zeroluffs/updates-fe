@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { forwardRef } from "react"; //need to import this so icon works
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
