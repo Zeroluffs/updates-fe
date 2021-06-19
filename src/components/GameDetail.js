@@ -10,7 +10,7 @@ import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
 import { useFoundGameState } from "../utils/foundGame.hook";
-import { FormatUnderlinedRounded } from "@material-ui/icons";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +33,27 @@ const useStyles = makeStyles((theme) => ({
     background:
       "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
+  button: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
 }));
+
+const theme = createMuiTheme({
+  typography: {
+    body1: {
+      fontSize: 18,
+      marginBottom: "10px",
+    },
+    h5: {
+      fontSize: 23,
+      fontWeight: 500,
+      marginBottom: "10px",
+    },
+  },
+  button: {},
+});
 
 const GameDetail = (props) => {
   // eslint-disable-next-line no-unused-vars
@@ -58,67 +78,77 @@ const GameDetail = (props) => {
   const isFound = useFoundGameState(user.user.id, game.id);
 
   return (
-    <div>
-      <Typography variant="h2">{game.name}</Typography>
-      <div class="containertest">
-        <div className="testing">
-          <img
-            alt="background"
-            className="main"
-            src={game.background_image}
-          ></img>
-        </div>
-        <div className="gamed">
-          <Typography variant="body1">Released: {game.released}</Typography>
-          <Typography variant="body1">Rating: {game.rating}</Typography>
-          <Typography variant="h5">Genre(s):</Typography>
-          <Typography variant="body1">
-            {game.genres.map((g) => `${g.name} | `)}
-          </Typography>
+    <ThemeProvider theme={theme}>
+      <div>
+        <Typography variant="h2">{game.name}</Typography>
+        <div class="containertest">
+          <div className="testing">
+            <img
+              alt="background"
+              className="main"
+              src={game.background_image}
+            ></img>
+          </div>
+          <div className="gamed">
+            <Typography variant="h5">Release Date:</Typography>
+            <Typography variant="body1"> {game.released}</Typography>
+            <Typography variant="h5">Rating:</Typography>
+            <Typography variant="body1"> {game.rating}</Typography>
+            <Typography variant="h5">Genre(s):</Typography>
+            <Typography variant="body1">
+              {game.genres.map((g) => `${g.name} | `)}
+            </Typography>
 
-          <Typography variant="h5">Platform(s):</Typography>
-          <Typography variant="body1">
-            {game.platforms.map((p) => `${p.platform.name} | `)}
-          </Typography>
-          <Button size="small" variant="outlined" color="secondary">
-            Secondary
-          </Button>
-          <Button
-            onClick={(e) => {
-              addGame(game, user);
-              setFound(true);
-            }}
-            variant="outlined"
-            className="Button"
-            disabled={isFound || found}
-          >
-            Add Game
-          </Button>
+            <Typography variant="h5">Platform(s):</Typography>
+            <Typography variant="body1">
+              {game.platforms.map((p) => `${p.platform.name} | `)}
+            </Typography>
+            <div className={classes.button}>
+              <Button
+                className="secondarybtn"
+                size="small"
+                variant="outlined"
+                color="secondary"
+              >
+                Keep Searching
+              </Button>
+              <Button
+                onClick={(e) => {
+                  addGame(game, user);
+                  setFound(true);
+                }}
+                variant="outlined"
+                className="Button"
+                disabled={isFound || found}
+              >
+                Add Game
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className={classes.root}>
+          <GridList className={classes.gridList} cols={cols}>
+            {game.short_screenshots.map((ss) => (
+              <GridListTile key={ss.image}>
+                <img
+                  src={ss.image}
+                  alt="screenshot"
+                  maxWidth="100%"
+                  className="imageingallery"
+                  height="auto"
+                ></img>
+                <GridListTileBar
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                  }}
+                ></GridListTileBar>
+              </GridListTile>
+            ))}
+          </GridList>
         </div>
       </div>
-      <div className={classes.root}>
-        <GridList className={classes.gridList} cols={cols}>
-          {game.short_screenshots.map((ss) => (
-            <GridListTile key={ss.image}>
-              <img
-                src={ss.image}
-                alt="screenshot"
-                maxWidth="100%"
-                className="imageingallery"
-                height="auto"
-              ></img>
-              <GridListTileBar
-                title={game.name}
-                classes={{
-                  root: classes.titleBar,
-                  title: classes.title,
-                }}
-              ></GridListTileBar>
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
-    </div>
+    </ThemeProvider>
   );
 };
 

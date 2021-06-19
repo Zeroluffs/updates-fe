@@ -74,6 +74,7 @@
 .containertest {
   display: flex;
   flex-flow: row wrap;
+  margin-bottom: 20px;
 }
 
 .itemtest {
@@ -85,6 +86,7 @@
 
 .gamed {
   width: 600px;
+  position: relative;
 }
 
 .Button {
@@ -98,4 +100,8 @@
 
 .imageingallery {
   object-fit: "cover";
+}
+
+.secondarybtn {
+  margin-right: 30px;
 }
