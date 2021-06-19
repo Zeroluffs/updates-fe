@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 import MaterialTable from "material-table";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import TableIcons from "./TableIcons";
