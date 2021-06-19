@@ -81,7 +81,7 @@ const GameCard = (props) => {
             addGame(game, user);
             setFound(true);
           }}
-          disabled={isFound}
+          disabled={isFound || found}
         >
           Add to My List
         </Button>
