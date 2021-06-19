@@ -37,7 +37,6 @@ const GameList = (props) => {
 
   useEffect(() => {
     api.get(`/games/${user.user.id}`).then((res) => {
-      console.log(res.data);
       setData(res.data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
