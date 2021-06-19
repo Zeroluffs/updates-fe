@@ -10,7 +10,6 @@ import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
 import { useFoundGameState } from "../utils/foundGame.hook";
-import { FormatUnderlinedRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {

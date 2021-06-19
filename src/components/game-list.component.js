@@ -118,6 +118,9 @@ const GameList = (props) => {
             },
           },
         ]}
+        options={{
+          actionsColumnIndex: -1,
+        }}
       ></MaterialTable>
     </div>
   );
