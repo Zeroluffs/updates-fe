@@ -1,22 +1,8 @@
-import React, {
-  Component,
-  useState,
-  useEffect,
-  useContext,
-  Fragment,
-  useCallback,
-} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-import { Button, TextField, Paper } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import MaterialTable from "material-table";
-import {
-  Edit as EditIcon,
-  Add as AddIcon,
-  MonetizationOn,
-  Delete as DeleteIcon,
-} from "@material-ui/icons";
+import { Delete as DeleteIcon } from "@material-ui/icons";
 import TableIcons from "./TableIcons";
 
 const api = axios.create({
@@ -50,16 +36,15 @@ const GameList = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    api.get("/games" + "/" + user.user.id).then((res) => {
+    api.get(`/games/${user.user.id}`).then((res) => {
       console.log(res.data);
       setData(res.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleRowClick = async (event, rowData) => {
     console.log(rowData.id);
-    const res = await gamesApi.get(
-      "/" + rowData.id + "?" + "key=" + REACT_APP_API_KEY
-    );
+    const res = await gamesApi.get(`/${rowData.id}?key=${REACT_APP_API_KEY}`);
     const games = res.data;
     console.log(games);
     fetch(
@@ -82,7 +67,7 @@ const GameList = (props) => {
   };
   const handleRowDelete = (oldData, resolve) => {
     api
-      .delete("/games/" + user.user.id + "/" + oldData._id)
+      .delete(`/games/${user.user.id}/${oldData._id}`)
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
