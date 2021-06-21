@@ -28,3 +28,27 @@ export async function addGame(game, user) {
       alert("Error adding game");
     });
 }
+
+export async function addBook(book, user) {
+  const bookToAdd = {
+    name: book.volumeInfo.title,
+    publishedDate: book.volumeInfo.publishedDate,
+    averageRating: book.volumeInfo.averageRating,
+    id: book.id,
+  };
+
+  api
+    .post("/books/" + user.user.id, bookToAdd)
+    .then((res) => {
+      if (res.status === 200) {
+        console.log("book added");
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Error adding book");
+    });
+}

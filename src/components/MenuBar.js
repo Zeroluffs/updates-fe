@@ -24,6 +24,13 @@ function MenuBar() {
           to="/search"
         ></Menu.Item>
         <Menu.Item
+          name="searchbook"
+          active={activeItem === "searchbook"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/searchbook"
+        ></Menu.Item>
+        <Menu.Item
           name="list"
           active={activeItem === "list"}
           onClick={handleItemClick}

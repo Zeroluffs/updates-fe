@@ -14,6 +14,7 @@ import AuthRoute from "./utils/AuthRoute";
 import Search from "./components/Search";
 import GameDetail from "./components/GameDetail";
 import GameList from "./components/game-list.component";
+import SearchBook from "./components/SearchBook";
 function App() {
   return (
     <AuthProvider>
@@ -22,6 +23,7 @@ function App() {
           <MenuBar />
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/searchbook" component={SearchBook} />
           <Route path="/game/:name" component={GameDetail} />
           <Route exact path="/gamelist" component={GameList} />
           <AuthRoute exact path="/login" component={Login}></AuthRoute>
