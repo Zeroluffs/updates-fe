@@ -63,7 +63,7 @@ const GameCard = (props) => {
             title="screenshot"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom noWrap variant="h5" component="h2">
               {game.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
