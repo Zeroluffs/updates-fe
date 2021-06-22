@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -8,6 +8,7 @@ import { Typography, Button } from "@material-ui/core";
 import CardActions from "@material-ui/core/CardActions";
 import { addBook } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
+import { useFoundItemState } from "../utils/foundItem.hook";
 
 const useStyles = makeStyles({
   root: {
@@ -21,10 +22,11 @@ const useStyles = makeStyles({
   },
 });
 const BookCard = (props) => {
+  const [found, setFound] = useState(false);
   const user = useContext(AuthContext);
   const classes = useStyles();
   const book = props.book;
-  console.log(book);
+  const isFound = useFoundItemState(user.user.id, book.id, "books");
 
   return (
     // <img
@@ -58,7 +60,9 @@ const BookCard = (props) => {
           color="primary"
           onClick={(e) => {
             addBook(book, user);
+            setFound(true);
           }}
+          disabled={isFound || found}
         >
           Add to My List
         </Button>

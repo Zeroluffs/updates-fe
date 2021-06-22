@@ -6,16 +6,18 @@ import axios from "axios";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
-export function useFoundGameState(userID, gameID) {
-  const [foundgame, setFoundgame] = useState(false);
+
+
+export function useFoundItemState(userID, itemID, item) {
+  const [founditem, setFounditem] = useState(false);
 
   useEffect(() => {
     function handleStatusChange() {
-      setFoundgame(true);
+      setFounditem(true);
     }
-    api.get(`/games/${userID}`).then((res) => {
+    api.get(`/${item}/${userID}`).then((res) => {
       var __FOUND = res.data.find(function (post, index) {
-        if (post.id === gameID.toString()) {
+        if (post.id === itemID.toString()) {
           handleStatusChange();
           return true;
         }
@@ -24,5 +26,5 @@ export function useFoundGameState(userID, gameID) {
     });
   }, []);
 
-  return foundgame;
+  return founditem;
 }
