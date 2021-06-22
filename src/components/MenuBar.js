@@ -37,6 +37,13 @@ function MenuBar() {
           as={Link}
           to="/gamelist"
         ></Menu.Item>
+        <Menu.Item
+          name="booklist"
+          active={activeItem === "booklist"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/booklist"
+        ></Menu.Item>
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
     </Menu>
