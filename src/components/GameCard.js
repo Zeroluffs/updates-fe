@@ -11,7 +11,8 @@ import "../App.css";
 
 import { AuthContext } from "../context/auth";
 import { addGame } from "../utils/helper.functions";
-import { useFoundGameState } from "../utils/foundGame.hook";
+// import { useFoundGameState } from "../utils/foundGame.hook";
+import { useFoundItemState } from "../utils/foundItem.hook";
 
 const useStyles = makeStyles({
   root: {
@@ -44,7 +45,7 @@ const GameCard = (props) => {
     //   });
     // });
   }, []);
-  const isFound = useFoundGameState(user.user.id, game.id);
+  const isFound = useFoundItemState(user.user.id, game.id, "games");
 
   return (
     <Card className={classes.root}>

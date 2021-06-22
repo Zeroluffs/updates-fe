@@ -9,7 +9,8 @@ import Button from "@material-ui/core/Button";
 import "../App.css";
 import { addGame } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
-import { useFoundGameState } from "../utils/foundGame.hook";
+// import { useFoundGameState } from "../utils/foundGame.hook";
+import { useFoundItemState } from "../utils/foundItem.hook";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +76,7 @@ const GameDetail = (props) => {
   const { game } = props.location.gameProps;
   const user = useContext(AuthContext);
 
-  const isFound = useFoundGameState(user.user.id, game.id);
+  const isFound = useFoundItemState(user.user.id, game.id, "games");
 
   return (
     <ThemeProvider theme={theme}>
