@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Results from "./Results";
 import SearchBar from "material-ui-search-bar";
+import "../App.css";
 const Search = () => {
   const { REACT_APP_API_KEY } = process.env;
   const [searchTerm, setSearchTerm] = useState("");
