@@ -9,6 +9,7 @@ import CardActions from "@material-ui/core/CardActions";
 import { addBook } from "../utils/helper.functions";
 import { AuthContext } from "../context/auth";
 import { useFoundItemState } from "../utils/foundItem.hook";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -38,22 +39,32 @@ const BookCard = (props) => {
     //   }
     // ></img>
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          title={book.volumeInfo.title}
-          className={classes.media}
-          image={
-            book.volumeInfo.imageLinks !== undefined
-              ? book.volumeInfo.imageLinks.thumbnail
-              : ""
-          }
-        ></CardMedia>
-        <CardContent title={book.volumeInfo.title}>
-          <Typography noWrap variant="body2" component="p">
-            {book.volumeInfo.title}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <Link
+        to={{
+          pathname: `/book/${book.volumeInfo.title}`,
+          bookProps: {
+            book: book,
+          },
+        }}
+      >
+        <CardActionArea>
+          <CardMedia
+            title={book.volumeInfo.title}
+            className={classes.media}
+            image={
+              book.volumeInfo.imageLinks !== undefined
+                ? book.volumeInfo.imageLinks.thumbnail
+                : ""
+            }
+          ></CardMedia>
+          <CardContent title={book.volumeInfo.title}>
+            <Typography noWrap variant="body2" component="p">
+              {book.volumeInfo.title}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
+
       <CardActions>
         <Button
           size="small"

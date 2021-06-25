@@ -1,0 +1,9 @@
+.itemTable {
+  padding-top: 10%;
+}
+
+@media screen and (max-width: 900px) {
+  .itemTable {
+    padding-top: 15%;
+  }
+}

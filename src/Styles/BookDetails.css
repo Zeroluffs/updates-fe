@@ -1,0 +1,64 @@
+.bookCover {
+  width: 175px;
+  height: 275px;
+  object-fit: cover;
+  /* padding-bottom: 10px; */
+  margin-bottom: 10px;
+}
+.bookCoverDiv {
+  border: 1px solid #dbdee0;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+}
+.bookDetailsDiv {
+  /* display: inline-block; */
+  /* border: 4px solid #333; */
+  padding: 10px;
+}
+
+.detailsContainer {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  /* flex-flow: column wrap; */
+  /* border: 1px solid black; */
+  padding-top: 10%;
+}
+@media screen and (max-width: 900px) {
+  .detailsContainer {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    /* flex-flow: column wrap; */
+    /* border: 1px solid black; */
+    padding-top: 20%;
+  }
+}
+.detailDividers {
+  margin: 10px;
+}
+
+.detailContent {
+  padding: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .detailsContainer {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    flex-flow: column wrap;
+    /* border: 1px solid black; */
+  }
+  .bookCover {
+    width: 175px;
+    height: 275px;
+    object-fit: cover;
+    /* padding-bottom: 10px; */
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+.read-or-hide {
+  color: rgb(25, 0, 255);
+  cursor: pointer;
+}

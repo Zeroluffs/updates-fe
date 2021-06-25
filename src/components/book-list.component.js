@@ -4,16 +4,13 @@ import axios from "axios";
 import MaterialTable from "material-table";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import TableIcons from "./TableIcons";
-import "../Styles/Tables.css";
 
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
-const gamesApi = axios.create({
-  baseURL: `https://api.rawg.io/api/games`,
-});
-const GameList = (props) => {
-  const { REACT_APP_API_KEY } = process.env;
+
+const BookList = (props) => {
+  const { REACT_APP_API_KEY2 } = process.env;
 
   var columns = [
     {
@@ -22,52 +19,30 @@ const GameList = (props) => {
       hidden: true,
     },
     {
-      title: "gameID",
+      title: "bookID",
       field: "id",
       hidden: true,
     },
-    { title: "Name", field: "name" },
+    { title: "Title", field: "name" },
     {
-      title: "Release Date",
-      field: "releaseDate",
+      title: "Date of Publication",
+      field: "publishedDate",
     },
   ];
   const user = useContext(AuthContext);
-  const [game, setGame] = useState({});
   const [data, setData] = useState([]);
+  const [book, setBook] = useState({});
 
   useEffect(() => {
-    api.get(`/games/${user.user.id}`).then((res) => {
+    api.get(`/books/${user.user.id}`).then((res) => {
       setData(res.data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const handleRowClick = async (event, rowData) => {
-    console.log(rowData.id);
-    const res = await gamesApi.get(`/${rowData.id}?key=${REACT_APP_API_KEY}`);
-    const games = res.data;
-    console.log(games);
-    fetch(
-      `https://api.rawg.io/api/games?search=${games.slug}&key=${REACT_APP_API_KEY}`
-    )
-      .then((res) => res.json())
-      .then(({ results }) => {
-        results === undefined ? alert("no games found") : console.log("sup");
-        setGame(results[0]);
-        console.log("results");
-        console.log(game);
-        const test = results[0];
-        props.history.push({
-          pathname: `/game/${test.slug}`,
-          gameProps: {
-            game: test,
-          },
-        });
-      });
-  };
+
   const handleRowDelete = (oldData, resolve) => {
     api
-      .delete(`/games/${user.user.id}/${oldData._id}`)
+      .delete(`/books/${user.user.id}/${oldData._id}`)
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
@@ -85,17 +60,17 @@ const GameList = (props) => {
   return (
     <div className="itemTable">
       <MaterialTable
-        title="Game List"
+        title="Book List"
         columns={columns}
-        onRowClick={handleRowClick}
+        // onRowClick={handleRowClick}
         data={data}
         icons={TableIcons}
         actions={[
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Remove Game",
+            tooltip: "Remove Book",
             onClick: (event, oldData) => {
-              if (window.confirm("Are you sure you want to remove the game?")) {
+              if (window.confirm("Are you sure you want to remove the book?")) {
                 new Promise((resolve) => {
                   handleRowDelete(oldData, resolve);
                 });
@@ -111,4 +86,4 @@ const GameList = (props) => {
   );
 };
 
-export default GameList;
+export default BookList;

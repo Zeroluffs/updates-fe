@@ -13,8 +13,10 @@ import { AuthProvider } from "./context/auth";
 import AuthRoute from "./utils/AuthRoute";
 import Search from "./components/Search";
 import GameDetail from "./components/GameDetail";
+import BookDetail from "./components/BookDetail";
 import GameList from "./components/game-list.component";
 import SearchBook from "./components/SearchBook";
+import BookList from "./components/book-list.component";
 function App() {
   return (
     <AuthProvider>
@@ -25,7 +27,9 @@ function App() {
           <Route exact path="/search" component={Search} />
           <Route exact path="/searchbook" component={SearchBook} />
           <Route path="/game/:name" component={GameDetail} />
+          <Route path="/book/:name" component={BookDetail} />
           <Route exact path="/gamelist" component={GameList} />
+          <Route exact path="/booklist" component={BookList} />
           <AuthRoute exact path="/login" component={Login}></AuthRoute>
           <AuthRoute exact path="/register" component={Register}></AuthRoute>
         </Container>
