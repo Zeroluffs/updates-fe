@@ -40,10 +40,25 @@ const BookDetail = (props) => {
     },
   });
   const [found, setFound] = useState(false);
-
   const { book } = props.location.bookProps;
   const user = useContext(AuthContext);
   const isFound = useFoundItemState(user.user.id, book.id, "books");
+
+  const ReadMore = ({ children }) => {
+    const text = children;
+    const [isReadMore, setIsReadMore] = useState(true);
+    const toggleReadMore = () => {
+      setIsReadMore(!isReadMore);
+    };
+    return (
+      <Typography style={{ wordWrap: "break-word" }}>
+        {isReadMore ? text.slice(0, 450) : text}
+        <span onClick={toggleReadMore} className="read-or-hide">
+          {isReadMore ? "...read more" : " show less"}
+        </span>
+      </Typography>
+    );
+  };
 
   return (
     <div>
@@ -89,10 +104,7 @@ const BookDetail = (props) => {
             </div>
             <Divider className="detailDividers"></Divider>
             <div className="detailContent">
-              <Typography style={{ wordWrap: "break-word" }}>
-                {" "}
-                {book.volumeInfo.description}
-              </Typography>
+              <ReadMore>{book.volumeInfo.description}</ReadMore>
             </div>
 
             <Divider></Divider>
