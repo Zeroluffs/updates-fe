@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Drawer, Link, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import MenuButton from "./menuButton";
 const useStyles = makeStyles(() => ({
   header: {
     backgroundColor: "#708090",
@@ -47,22 +47,49 @@ const headersData = [
 
 const headersDataLogged = [
   {
-    label: "Search",
+    label: "Search Game",
     href: "/search",
-  },
-  {
-    label: "Game List",
-    href: "/gamelist",
   },
   {
     label: "Search Book",
     href: "/searchbook",
   },
   {
+    label: "Game List",
+    href: "/gamelist",
+  },
+  {
     label: "Book List",
     href: "/booklist",
   },
 ];
+
+const menuSearchItems = [
+  {
+    name: "Search",
+    label: "Search Game",
+    href: "/search",
+  },
+  {
+    name: "Search",
+    label: "Search Book",
+    href: "/searchbook",
+  },
+];
+
+const menuListItems = [
+  {
+    name: "List",
+    label: "Game List",
+    href: "/gamelist",
+  },
+  {
+    name: "List",
+    label: "Book List",
+    href: "/booklist",
+  },
+];
+
 function MenuBar() {
   const { user, logout } = useContext(AuthContext);
   const { header, logo, menuButton, toolbar, drawerContainer } = useStyles();
@@ -107,7 +134,7 @@ function MenuBar() {
         </IconButton>
         <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerClose}>
           <div className={drawerContainer}>
-            {getDrawerChoicesLogged()}{" "}
+            {getDrawerChoicesLogged()}
             <Link
               {...{
                 component: RouterLink,
@@ -184,7 +211,9 @@ function MenuBar() {
       <Toolbar className={toolbar}>
         {updatesAppLogo}{" "}
         <div>
-          {getMenuButtonsLogged()}
+          {/* {getMenuButtonsLogged()} */}
+          <MenuButton menuSearchItems={menuSearchItems}></MenuButton>
+          <MenuButton menuSearchItems={menuListItems}></MenuButton>
           <Button
             {...{
               key: "logout",
@@ -201,15 +230,10 @@ function MenuBar() {
       </Toolbar>
     ) : (
       <Toolbar className={toolbar}>
-        {updatesAppLogo} <div>{getMenuButtons()}</div>{" "}
+        {updatesAppLogo} <div>{getMenuButtons()}</div>
       </Toolbar>
     );
     return menuBar;
-    // return (
-    //   <Toolbar className={toolbar}>
-    //     {updatesAppLogo} <div>{getMenuButtons()}</div>
-    //   </Toolbar>
-    // );
   };
 
   const updatesAppLogo = (
@@ -220,23 +244,6 @@ function MenuBar() {
 
   const getMenuButtons = () => {
     return headersData.map(({ label, href }) => {
-      return (
-        <Button
-          {...{
-            key: label,
-            color: "inherit",
-            to: href,
-            component: RouterLink,
-            className: menuButton,
-          }}
-        >
-          {label}
-        </Button>
-      );
-    });
-  };
-  const getMenuButtonsLogged = () => {
-    return headersDataLogged.map(({ label, href }) => {
       return (
         <Button
           {...{
