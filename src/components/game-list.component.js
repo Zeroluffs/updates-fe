@@ -4,6 +4,7 @@ import axios from "axios";
 import MaterialTable from "material-table";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import TableIcons from "./TableIcons";
+import "../Styles/Tables.css";
 
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
@@ -82,7 +83,7 @@ const GameList = (props) => {
       });
   };
   return (
-    <div>
+    <div className="itemTable">
       <MaterialTable
         title="Game List"
         columns={columns}

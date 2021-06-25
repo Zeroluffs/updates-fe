@@ -58,7 +58,7 @@ const BookList = (props) => {
       });
   };
   return (
-    <div>
+    <div className="itemTable">
       <MaterialTable
         title="Book List"
         columns={columns}
