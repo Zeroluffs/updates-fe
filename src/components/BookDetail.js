@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import { addBook } from "../utils/helper.functions";
 
 import Button from "@material-ui/core/Button";
 import "../App.css";
@@ -42,7 +43,8 @@ const BookDetail = (props) => {
 
   const { book } = props.location.bookProps;
   const user = useContext(AuthContext);
-  console.log(book.volumeInfo);
+  const isFound = useFoundItemState(user.user.id, book.id, "books");
+
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -59,7 +61,15 @@ const BookDetail = (props) => {
                 }
               ></img>
               <Typography align="center">
-                <Button variant="contained" color="primary">
+                <Button
+                  onClick={(e) => {
+                    addBook(book, user);
+                    setFound(true);
+                  }}
+                  variant="contained"
+                  color="primary"
+                  disabled={found || isFound}
+                >
                   Add To List
                 </Button>
               </Typography>
