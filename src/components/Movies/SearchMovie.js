@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import axios from "axios";
+import MovieResults from "./MovieResults";
 
 const api = axios.create({
   baseURL: `http://www.omdbapi.com/`,
@@ -32,7 +33,7 @@ const SearchMovie = () => {
           maxWidth: 800,
         }}
       ></SearchBar>
-      {/* <ResultMovies movieResults={movieResults}></ResultMovies> */}
+      <MovieResults movieResults={movieResults}></MovieResults>
     </div>
   );
 };
