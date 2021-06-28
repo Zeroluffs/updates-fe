@@ -17,7 +17,7 @@ import BookDetail from "./components/BookDetail";
 import GameList from "./components/game-list.component";
 import SearchBook from "./components/SearchBook";
 import BookList from "./components/book-list.component";
-import SearchMovie from "./components/SearchMovie";
+import SearchMovie from "./components/Movies/SearchMovie";
 function App() {
   return (
     <AuthProvider>
