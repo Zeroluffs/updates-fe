@@ -55,6 +55,10 @@ const headersDataLogged = [
     href: "/searchbook",
   },
   {
+    label: "Search Movie",
+    href: "/searchmovie",
+  },
+  {
     label: "Game List",
     href: "/gamelist",
   },
@@ -74,6 +78,10 @@ const menuSearchItems = [
     name: "Search",
     label: "Search Book",
     href: "/searchbook",
+  },
+  {
+    label: "Search Movie",
+    href: "/searchmovie",
   },
 ];
 

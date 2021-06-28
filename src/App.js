@@ -17,6 +17,7 @@ import BookDetail from "./components/BookDetail";
 import GameList from "./components/game-list.component";
 import SearchBook from "./components/SearchBook";
 import BookList from "./components/book-list.component";
+import SearchMovie from "./components/SearchMovie";
 function App() {
   return (
     <AuthProvider>
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/searchbook" component={SearchBook} />
+          <Route exact path="/searchmovie" component={SearchMovie} />
           <Route path="/game/:name" component={GameDetail} />
           <Route path="/book/:name" component={BookDetail} />
           <Route exact path="/gamelist" component={GameList} />
