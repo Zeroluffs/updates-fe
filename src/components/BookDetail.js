@@ -12,7 +12,7 @@ import "../Styles/BookDetails.css";
 import Divider from "@material-ui/core/Divider";
 
 const BookDetail = (props) => {
-  const theme = createMuiTheme({
+  const booktheme = createMuiTheme({
     typography: {
       // fontFamily: [
       //   "-apple-system",
@@ -61,7 +61,7 @@ const BookDetail = (props) => {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={booktheme}>
         <div className="detailsContainer">
           <Typography align="center">
             <div className="bookCoverDiv">
