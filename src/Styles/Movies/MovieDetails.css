@@ -26,6 +26,7 @@
 }
 .moviesContainer .buttonAdd {
   width: 100%;
+  margin-top: 2%;
 }
 
 .moviesContainer > .movieDetails {
@@ -57,8 +58,11 @@
   .moviesContainer .movieDetails {
     grid-column: 1 / -1;
   }
-
+  .movieLi {
+    margin-right: 6%;
+  }
   .moviesContainer .buttonAdd {
     width: 100%;
+    margin-top: 2%;
   }
 }

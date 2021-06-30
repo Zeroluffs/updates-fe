@@ -29,7 +29,9 @@ const MovieDetails = (props) => {
           alt=""
           src={movie.Poster !== undefined ? movie.Poster : ""}
         ></img>
-        <Button className="buttonAdd">Add To List</Button>
+        <Button variant="contained" color="primary" className="buttonAdd">
+          Add To List
+        </Button>
       </div>
       <div className="movieDetails">
         <Typography variant="h4">
