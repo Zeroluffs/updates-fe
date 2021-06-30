@@ -26,13 +26,22 @@ const MovieCard = (props) => {
   console.log(movie.Title);
   return (
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          title={movie.Title}
-          className={classes.media}
-          image={movie.Poster !== undefined ? movie.Poster : ""}
-        ></CardMedia>
-      </CardActionArea>
+      <Link
+        to={{
+          pathname: `/movie/${movie.Title}`,
+          movieProps: {
+            movie: movie,
+          },
+        }}
+      >
+        <CardActionArea>
+          <CardMedia
+            title={movie.Title}
+            className={classes.media}
+            image={movie.Poster !== undefined ? movie.Poster : ""}
+          ></CardMedia>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 };

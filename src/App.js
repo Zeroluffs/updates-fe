@@ -14,6 +14,7 @@ import AuthRoute from "./utils/AuthRoute";
 import Search from "./components/Search";
 import GameDetail from "./components/GameDetail";
 import BookDetail from "./components/BookDetail";
+import MovieDetails from "./components/Movies/MovieDetails";
 import GameList from "./components/game-list.component";
 import SearchBook from "./components/SearchBook";
 import BookList from "./components/book-list.component";
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/searchmovie" component={SearchMovie} />
           <Route path="/game/:name" component={GameDetail} />
           <Route path="/book/:name" component={BookDetail} />
+          <Route path="/movie/:name" component={MovieDetails} />
           <Route exact path="/gamelist" component={GameList} />
           <Route exact path="/booklist" component={BookList} />
           <AuthRoute exact path="/login" component={Login}></AuthRoute>
