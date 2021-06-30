@@ -17,6 +17,9 @@
   padding: 10px;
 }
 
+.addBookBtn {
+  width: 100%;
+}
 .detailsContainer {
   display: inline-flex;
   flex-wrap: nowrap;
