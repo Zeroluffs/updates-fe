@@ -57,7 +57,7 @@ export async function addMovie(movie, user) {
     Title: movie.Title,
     Year: movie.Year,
     Metascore: movie.Metascore,
-    imdbID: movie.imdbID,
+    id: movie.imdbID,
   };
 
   api
