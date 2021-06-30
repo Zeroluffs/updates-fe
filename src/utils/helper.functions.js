@@ -51,3 +51,27 @@ export async function addBook(book, user) {
       alert("Error adding book");
     });
 }
+
+export async function addMovie(movie, user) {
+  const movieToAdd = {
+    Title: movie.Title,
+    Year: movie.Year,
+    Metascore: movie.Metascore,
+    id: movie.imdbID,
+  };
+
+  api
+    .post("/movies/" + user.user.id, movieToAdd)
+    .then((res) => {
+      if (res.status === 200) {
+        console.log("movie added");
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("Error adding movie");
+    });
+}
