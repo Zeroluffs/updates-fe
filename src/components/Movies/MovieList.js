@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../context/auth";
+import { AuthContext } from "../../context/auth";
 import axios from "axios";
 import MaterialTable from "material-table";
 import { Delete as DeleteIcon } from "@material-ui/icons";
-import TableIcons from "./TableIcons";
-import "../Styles/Tables.css";
-import authHeader from "../utils/helper.functions";
-
+import TableIcons from "../TableIcons";
+import "../../Styles/Tables.css";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
-const gamesApi = axios.create({
-  baseURL: `https://api.rawg.io/api/games`,
+const moviesApi = axios.create({
+  baseURL: `http://www.omdbapi.com/`,
 });
-const GameList = (props) => {
-  const { REACT_APP_API_KEY } = process.env;
+
+const MovieList = (props) => {
+  const { REACT_APP_API_KEY3 } = process.env;
 
   var columns = [
     {
@@ -23,50 +22,45 @@ const GameList = (props) => {
       hidden: true,
     },
     {
-      title: "gameID",
+      title: "movieID",
       field: "id",
       hidden: true,
     },
-    { title: "Name", field: "name" },
+    { title: "Title", field: "Title" },
     {
       title: "Release Date",
-      field: "releaseDate",
+      field: "Year",
     },
   ];
   const user = useContext(AuthContext);
-  const [game, setGame] = useState({});
+  const [movie, setMovie] = useState({});
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    api
-      .get(`/games/${user.user.id}`, {
-        headers: authHeader(),
-      })
-      .then((res) => {
-        setData(res.data);
-      });
+    api.get(`/movies/${user.user.id}`).then((res) => {
+      setData(res.data);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleRowClick = async (event, rowData) => {
     console.log(rowData.id);
-    const res = await gamesApi.get(`/${rowData.id}?key=${REACT_APP_API_KEY}`);
-    const games = res.data;
-    console.log(games);
-    games === undefined ? alert("no game found") : console.log("sup");
+    const res = await moviesApi.get(
+      `?apikey=${REACT_APP_API_KEY3}&i=${rowData.id}`
+    );
+    console.log(res.data);
+    const movie = res.data;
+    movie === undefined ? alert("no movie found") : console.log("error");
     props.history.push({
-      pathname: `/game/${games.slug}`,
-      gameProps: {
-        game: games,
+      pathname: `/movie/${movie.Title}`,
+      movieProps: {
+        movie: movie,
       },
     });
   };
   const handleRowDelete = (oldData, resolve) => {
     api
-      .delete(`/games/${user.user.id}/${oldData._id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-        },
-      })
+      .delete(`/movies/${user.user.id}/${oldData._id}`)
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
@@ -84,7 +78,7 @@ const GameList = (props) => {
   return (
     <div className="itemTable">
       <MaterialTable
-        title="Game List"
+        title="Movie List"
         columns={columns}
         onRowClick={handleRowClick}
         data={data}
@@ -92,9 +86,11 @@ const GameList = (props) => {
         actions={[
           {
             icon: () => <DeleteIcon />,
-            tooltip: "Remove Game",
+            tooltip: "Remove Movie",
             onClick: (event, oldData) => {
-              if (window.confirm("Are you sure you want to remove the game?")) {
+              if (
+                window.confirm("Are you sure you want to remove the movie?")
+              ) {
                 new Promise((resolve) => {
                   handleRowDelete(oldData, resolve);
                 });
@@ -110,4 +106,4 @@ const GameList = (props) => {
   );
 };
 
-export default GameList;
+export default MovieList;

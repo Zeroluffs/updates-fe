@@ -19,6 +19,7 @@ import GameList from "./components/game-list.component";
 import SearchBook from "./components/SearchBook";
 import BookList from "./components/book-list.component";
 import SearchMovie from "./components/Movies/SearchMovie";
+import MovieList from "./components/Movies/MovieList";
 function App() {
   return (
     <AuthProvider>
@@ -34,6 +35,7 @@ function App() {
           <Route path="/movie/:name" component={MovieDetails} />
           <Route exact path="/gamelist" component={GameList} />
           <Route exact path="/booklist" component={BookList} />
+          <Route exact path="/movielist" component={MovieList} />
           <AuthRoute exact path="/login" component={Login}></AuthRoute>
           <AuthRoute exact path="/register" component={Register}></AuthRoute>
         </Container>

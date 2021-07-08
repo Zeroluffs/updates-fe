@@ -19,14 +19,11 @@ const Search = () => {
     )
       .then((res) => res.json())
       .then(({ results }) => {
-        results === undefined
-          ? alert("no games found")
-          : setGameResults(results);
+        results === undefined ? alert("no games found") : console.log(results);
+        setGameResults(results);
       });
-
     setSearchTerm("");
   };
-
   return (
     <div className="game-search">
       <SearchBar

@@ -4,6 +4,15 @@ const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
 
+export default function authHeader() {
+  const token = JSON.parse(localStorage.getItem("jwToken"));
+
+  if (token) {
+    return { Authorization: "Bearer " + token };
+  } else {
+    return {};
+  }
+}
 export async function addGame(game, user) {
   console.log(user);
   const gameToAdd = {
