@@ -66,6 +66,10 @@ const headersDataLogged = [
     label: "Book List",
     href: "/booklist",
   },
+  {
+    label: "Movie List",
+    href: "/movielist",
+  },
 ];
 
 const menuSearchItems = [
@@ -95,6 +99,11 @@ const menuListItems = [
     name: "List",
     label: "Book List",
     href: "/booklist",
+  },
+  {
+    name: "List",
+    label: "Movie List",
+    href: "/movielist",
   },
 ];
 

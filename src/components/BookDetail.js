@@ -12,7 +12,7 @@ import "../Styles/BookDetails.css";
 import Divider from "@material-ui/core/Divider";
 
 const BookDetail = (props) => {
-  const theme = createMuiTheme({
+  const booktheme = createMuiTheme({
     typography: {
       // fontFamily: [
       //   "-apple-system",
@@ -31,7 +31,7 @@ const BookDetail = (props) => {
         fontStyle: "italic",
       },
       body1: {
-        fontweight: 600,
+        fontSize: 18,
       },
       body2: {
         fontweight: 600,
@@ -50,7 +50,7 @@ const BookDetail = (props) => {
       setIsReadMore(!isReadMore);
     };
     return (
-      <Typography style={{ wordWrap: "break-word" }}>
+      <Typography variant="body1" style={{ wordWrap: "break-word" }}>
         {isReadMore ? text.slice(0, 450) : text}
         <span onClick={toggleReadMore} className="read-or-hide">
           {isReadMore ? "...read more" : " show less"}
@@ -61,7 +61,7 @@ const BookDetail = (props) => {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={booktheme}>
         <div className="detailsContainer">
           <Typography align="center">
             <div className="bookCoverDiv">
@@ -76,6 +76,7 @@ const BookDetail = (props) => {
               ></img>
               <Typography align="center">
                 <Button
+                  className="addBookBtn"
                   onClick={(e) => {
                     addBook(book, user);
                     setFound(true);

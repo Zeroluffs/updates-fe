@@ -34,17 +34,6 @@ const GameCard = (props) => {
   const classes = useStyles();
   const game = props.game;
 
-  useEffect(() => {
-    // api.get("/games" + "/" + user.user.id).then((res) => {
-    //   var __FOUND = res.data.find(function (post, index) {
-    //     if (post.id === game.id.toString()) {
-    //       setFound(true);
-    //       return true;
-    //     }
-    //     return false;
-    //   });
-    // });
-  }, []);
   const isFound = useFoundItemState(user.user.id, game.id, "games");
 
   return (

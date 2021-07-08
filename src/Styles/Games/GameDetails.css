@@ -1,0 +1,42 @@
+.gamesContainer {
+  margin-top: 10%;
+  gap: 1.6em;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 2%;
+}
+
+.gamesContainer > .gamePoster {
+  grid-column: span 2;
+}
+
+.gamesContainer > .gameDetails {
+  grid-column: span 3;
+}
+.gameDescription {
+  grid-column: 1 / -1;
+}
+
+.gameListDetail {
+  display: flex;
+}
+
+.listItem {
+  margin-right: 6%;
+}
+.buttonAdd {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .gamesContainer {
+    margin-top: 20%;
+  }
+  .gamesContainer > .gamePoster {
+    grid-column: 1 / -1;
+  }
+
+  .gamesContainer > .gameDetails {
+    grid-column: 1 / -1;
+  }
+}

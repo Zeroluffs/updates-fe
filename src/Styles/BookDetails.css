@@ -17,12 +17,19 @@
   padding: 10px;
 }
 
+.addBookBtn {
+  width: 100%;
+}
 .detailsContainer {
   display: inline-flex;
   flex-wrap: nowrap;
   /* flex-flow: column wrap; */
   /* border: 1px solid black; */
   padding-top: 10%;
+}
+
+.directorAndWriter {
+  margin-top: 10%;
 }
 @media screen and (max-width: 900px) {
   .detailsContainer {
