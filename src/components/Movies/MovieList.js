@@ -33,7 +33,6 @@ const MovieList = (props) => {
     },
   ];
   const user = useContext(AuthContext);
-  const [movie, setMovie] = useState({});
   const [data, setData] = useState([]);
 
   useEffect(() => {
