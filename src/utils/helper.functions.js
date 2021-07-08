@@ -42,7 +42,7 @@ export async function addBook(book, user) {
     name: book.volumeInfo.title,
     publishedDate: book.volumeInfo.publishedDate,
     averageRating: book.volumeInfo.averageRating,
-    id: book.id,
+    id: book.volumeInfo.industryIdentifiers[1].identifier,
   };
 
   api

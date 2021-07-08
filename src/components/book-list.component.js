@@ -8,7 +8,9 @@ import TableIcons from "./TableIcons";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
-
+const booksApi = axios.create({
+  baseURL: `https://www.googleapis.com/books/v1`,
+});
 const BookList = (props) => {
   const { REACT_APP_API_KEY2 } = process.env;
 
@@ -39,7 +41,23 @@ const BookList = (props) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const handleRowClick = async (event, rowData) => {
+    let query = rowData.name.split(" ").join("-").toLowerCase();
+    booksApi
+      .get(
+        `volumes?q=${query}hobbit+isbn:${rowData.id}&key=${REACT_APP_API_KEY2}`
+      )
+      .then((res) => {
+        console.log(res.data.items[0]);
+        const book = res.data.items[0];
+        props.history.push({
+          pathname: `/book/${rowData.name}`,
+          bookProps: {
+            book: book,
+          },
+        });
+      });
+  };
   const handleRowDelete = (oldData, resolve) => {
     api
       .delete(`/books/${user.user.id}/${oldData._id}`)
@@ -62,7 +80,7 @@ const BookList = (props) => {
       <MaterialTable
         title="Book List"
         columns={columns}
-        // onRowClick={handleRowClick}
+        onRowClick={handleRowClick}
         data={data}
         icons={TableIcons}
         actions={[
