@@ -15,7 +15,6 @@ const useStyles = makeStyles(() => ({
 const MenuButton = (props) => {
   const { menuButton } = useStyles();
   const menuSearchItems = props.menuSearchItems;
-  console.log(menuSearchItems);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {

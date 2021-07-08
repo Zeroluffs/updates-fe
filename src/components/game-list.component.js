@@ -34,7 +34,6 @@ const GameList = (props) => {
     },
   ];
   const user = useContext(AuthContext);
-  const [game, setGame] = useState({});
   const [data, setData] = useState([]);
 
   useEffect(() => {
