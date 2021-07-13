@@ -104,7 +104,6 @@ const GameDetail = (props) => {
   const user = useContext(AuthContext);
   useEffect(() => {
     gamesApi.get(`/${game.id}?key=${REACT_APP_API_KEY}`).then((res) => {
-      console.log(res.data);
       setGameDetails(res.data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

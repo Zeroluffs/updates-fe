@@ -44,11 +44,9 @@ const GameList = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleRowClick = async (event, rowData) => {
-    console.log(rowData.id);
     const res = await gamesApi.get(`/${rowData.id}?key=${REACT_APP_API_KEY}`);
     const games = res.data;
-    console.log(games);
-    games === undefined ? alert("no game found") : console.log("sup");
+    games === undefined ? alert("no game found") : console.log("");
     props.history.push({
       pathname: `/game/${games.slug}`,
       gameProps: {

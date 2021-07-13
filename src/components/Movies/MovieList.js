@@ -48,9 +48,8 @@ const MovieList = (props) => {
     const res = await moviesApi.get(
       `?apikey=${REACT_APP_API_KEY3}&i=${rowData.id}`
     );
-    console.log(res.data);
     const movie = res.data;
-    movie === undefined ? alert("no movie found") : console.log("error");
+    movie === undefined ? alert("no movie found") : console.log("");
     props.history.push({
       pathname: `/movie/${movie.Title}`,
       movieProps: {

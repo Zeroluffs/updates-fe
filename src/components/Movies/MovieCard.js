@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 const MovieCard = (props) => {
   const classes = useStyles();
   const movie = props.movie;
-  console.log(movie.Title);
   return (
     <Card className={classes.root}>
       <Link
