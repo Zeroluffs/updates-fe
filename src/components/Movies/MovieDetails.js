@@ -50,7 +50,6 @@ const MovieDetails = (props) => {
 
   useEffect(() => {
     api.get(`?apikey=${REACT_APP_API_KEY3}&i=${movie.imdbID}`).then((res) => {
-      console.log(res.data);
       setMovieDetails(res.data);
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps

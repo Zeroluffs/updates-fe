@@ -1,14 +1,11 @@
 import axios from "axios";
-
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
 
-export default function authHeader() {
-  const token = JSON.parse(localStorage.getItem("jwToken"));
-
+export default function authHeader(token) {
   if (token) {
-    return { Authorization: "Bearer " + token };
+    return { Authorization: `Bearer ${token}` };
   } else {
     return {};
   }
@@ -22,7 +19,9 @@ export async function addGame(game, user) {
     id: game.id,
   };
   api
-    .post("/games/" + user.user.id, gameToAdd)
+    .post("/games/" + user.user.id, gameToAdd, {
+      headers: authHeader(user.user.token),
+    })
     .then((res) => {
       if (res.status === 200) {
         console.log("game added");
@@ -46,7 +45,9 @@ export async function addBook(book, user) {
   };
 
   api
-    .post("/books/" + user.user.id, bookToAdd)
+    .post("/books/" + user.user.id, bookToAdd, {
+      headers: authHeader(user.user.token),
+    })
     .then((res) => {
       if (res.status === 200) {
         console.log("book added");
@@ -70,7 +71,9 @@ export async function addMovie(movie, user) {
   };
 
   api
-    .post("/movies/" + user.user.id, movieToAdd)
+    .post("/movies/" + user.user.id, movieToAdd, {
+      headers: authHeader(user.user.token),
+    })
     .then((res) => {
       if (res.status === 200) {
         console.log("movie added");

@@ -19,7 +19,6 @@ const SearchBook = () => {
     let query = searchTerm.split(" ").join("-").toLowerCase();
     setBookResults([]);
     api.get(`volumes?q=${query}&key=${REACT_APP_API_KEY2}`).then((res) => {
-      console.log(res.data.items);
       setBookResults(res.data.items);
     });
 

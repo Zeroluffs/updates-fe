@@ -35,23 +35,18 @@ const GameList = (props) => {
   ];
   const user = useContext(AuthContext);
   const [data, setData] = useState([]);
-
   useEffect(() => {
     api
-      .get(`/games/${user.user.id}`, {
-        headers: authHeader(),
-      })
+      .get(`/games/${user.user.id}`)
       .then((res) => {
         setData(res.data);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleRowClick = async (event, rowData) => {
-    console.log(rowData.id);
     const res = await gamesApi.get(`/${rowData.id}?key=${REACT_APP_API_KEY}`);
     const games = res.data;
-    console.log(games);
-    games === undefined ? alert("no game found") : console.log("sup");
+    games === undefined ? alert("no game found") : console.log("");
     props.history.push({
       pathname: `/game/${games.slug}`,
       gameProps: {
@@ -62,9 +57,7 @@ const GameList = (props) => {
   const handleRowDelete = (oldData, resolve) => {
     api
       .delete(`/games/${user.user.id}/${oldData._id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-        },
+        headers: authHeader(user.user.token),
       })
       .then((res) => {
         const dataDelete = [...data];

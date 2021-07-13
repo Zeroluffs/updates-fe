@@ -5,6 +5,7 @@ import MaterialTable from "material-table";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import TableIcons from "../TableIcons";
 import "../../Styles/Tables.css";
+import authHeader from "../../utils/helper.functions";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
@@ -47,9 +48,8 @@ const MovieList = (props) => {
     const res = await moviesApi.get(
       `?apikey=${REACT_APP_API_KEY3}&i=${rowData.id}`
     );
-    console.log(res.data);
     const movie = res.data;
-    movie === undefined ? alert("no movie found") : console.log("error");
+    movie === undefined ? alert("no movie found") : console.log("");
     props.history.push({
       pathname: `/movie/${movie.Title}`,
       movieProps: {
@@ -59,7 +59,9 @@ const MovieList = (props) => {
   };
   const handleRowDelete = (oldData, resolve) => {
     api
-      .delete(`/movies/${user.user.id}/${oldData._id}`)
+      .delete(`/movies/${user.user.id}/${oldData._id}`, {
+        headers: authHeader(user.user.token),
+      })
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
