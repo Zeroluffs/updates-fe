@@ -4,6 +4,7 @@ import axios from "axios";
 import MaterialTable from "material-table";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import TableIcons from "./TableIcons";
+import authHeader from "../utils/helper.functions";
 
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
@@ -60,7 +61,9 @@ const BookList = (props) => {
   };
   const handleRowDelete = (oldData, resolve) => {
     api
-      .delete(`/books/${user.user.id}/${oldData._id}`)
+      .delete(`/books/${user.user.id}/${oldData._id}`, {
+        headers: authHeader(user.user.token),
+      })
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;

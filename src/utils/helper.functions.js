@@ -1,12 +1,10 @@
 import axios from "axios";
-import { AuthContext } from "../context/auth";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
 
 export default function authHeader(token) {
   if (token) {
-    console.log(token);
     return { Authorization: `Bearer ${token}` };
   } else {
     return {};
@@ -47,7 +45,9 @@ export async function addBook(book, user) {
   };
 
   api
-    .post("/books/" + user.user.id, bookToAdd)
+    .post("/books/" + user.user.id, bookToAdd, {
+      headers: authHeader(user.user.token),
+    })
     .then((res) => {
       if (res.status === 200) {
         console.log("book added");
