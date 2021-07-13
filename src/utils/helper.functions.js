@@ -1,14 +1,13 @@
 import axios from "axios";
-
+import { AuthContext } from "../context/auth";
 const api = axios.create({
   baseURL: `http://localhost:3000/api`,
 });
 
-export default function authHeader() {
-  const token = JSON.parse(localStorage.getItem("jwToken"));
-
+export default function authHeader(token) {
   if (token) {
-    return { Authorization: "Bearer " + token };
+    console.log(token);
+    return { Authorization: `Bearer ${token}` };
   } else {
     return {};
   }
@@ -22,7 +21,9 @@ export async function addGame(game, user) {
     id: game.id,
   };
   api
-    .post("/games/" + user.user.id, gameToAdd)
+    .post("/games/" + user.user.id, gameToAdd, {
+      headers: authHeader(user.user.token),
+    })
     .then((res) => {
       if (res.status === 200) {
         console.log("game added");

@@ -35,12 +35,9 @@ const GameList = (props) => {
   ];
   const user = useContext(AuthContext);
   const [data, setData] = useState([]);
-
   useEffect(() => {
     api
-      .get(`/games/${user.user.id}`, {
-        headers: authHeader(),
-      })
+      .get(`/games/${user.user.id}`)
       .then((res) => {
         setData(res.data);
       });
@@ -62,9 +59,7 @@ const GameList = (props) => {
   const handleRowDelete = (oldData, resolve) => {
     api
       .delete(`/games/${user.user.id}/${oldData._id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-        },
+        headers: authHeader(user.user.token),
       })
       .then((res) => {
         const dataDelete = [...data];
