@@ -71,7 +71,9 @@ export async function addMovie(movie, user) {
   };
 
   api
-    .post("/movies/" + user.user.id, movieToAdd)
+    .post("/movies/" + user.user.id, movieToAdd, {
+      headers: authHeader(user.user.token),
+    })
     .then((res) => {
       if (res.status === 200) {
         console.log("movie added");

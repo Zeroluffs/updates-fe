@@ -34,7 +34,6 @@ const BookList = (props) => {
   ];
   const user = useContext(AuthContext);
   const [data, setData] = useState([]);
-  const [book, setBook] = useState({});
 
   useEffect(() => {
     api.get(`/books/${user.user.id}`).then((res) => {

@@ -16,7 +16,6 @@ const SearchMovie = () => {
     let searchValue = searchTerm.split(" ").join("-").toLowerCase();
     setMovieResults([]);
     api.get(`?apikey=${REACT_APP_API_KEY3}&s=${searchValue}`).then((res) => {
-      console.log(res.data.Search);
       setMovieResults(res.data.Search);
     });
 
